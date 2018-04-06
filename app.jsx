@@ -10,6 +10,28 @@ Header.propTypes = {
   title: React.PropTypes.string.isRequired,
 }
 
+function Player(props){
+  return(
+    <div className="player">
+      <div className="player-name">
+        {props.name}
+          </div>
+      <div className="player-score">
+        <div className="counter">
+          <button className="counter-action decrement"> - </button>
+          <div className="counter-score">{props.score}</div>
+          <button className="counter-action increment"> + </button>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+Player.propTypes = {
+  name: React.PropTypes.string.isRequired,
+  score: React.PropTypes.number.isRequired,
+}
+
 
 function Application(props){
   return(
@@ -17,33 +39,8 @@ function Application(props){
       <Header title={props.title} />
 
       <div className="players">
-        <div className="player">
-          <div className="player-name">
-            Nico
-          </div>
-          <div className="player-score">
-            <div className="counter">
-              <button className="counter-action decrement"> - </button>
-              <div className="counter-score">31</div>
-              <button className="counter-action increment"> + </button>
-            </div>
-          </div>
-        </div>
-
-        <div className="player">
-          <div className="player-name">
-            Dexter
-          </div>
-          <div className="player-score">
-            <div className="counter">
-              <button className="counter-action decrement"> - </button>
-              <div className="counter-score">21</div>
-              <button className="counter-action increment"> + </button>
-            </div>
-          </div>
-        </div>
-
-
+        <Player  name="Nico Lewis" score={31}/>
+        <Player name="Dexter Lewis" score={21} />
       </div>
 
     </div>
