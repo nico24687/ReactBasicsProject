@@ -28,51 +28,21 @@ Header.propTypes = {
   title: React.PropTypes.string.isRequired,
 }
 
-// var Counter = React.createClass({
-//   render: () => {
-//     return (
-//       <div className="counter">
-//         <button className="counter-action decrement"> - </button>
-//         <div className="counter-score">{this.props.score}</div>
-//         <button className="counter-action increment"> + </button>
-//       </div>
-//     )
-//   }
-// })
-
-class Counter extends React.Component {
-  constructor(props){
-    super(props)
-    this.state = { score: this.props.initialScore }
-  }
-
-  incrementScore(){
-    this.setState({
-      score: this.state.score + 1 
-    })
-  }
-
-  decrementScore(){
-    this.setState({
-      score: this.state.score - 1
-    })
-  }
-
-  render(){
-    return(
-      <div className="counter">
-        <button className="counter-action decrement" onClick={this.decrementScore.bind(this)}> - </button>
-        <div className="counter-score">{this.state.score}</div>
-        <button className="counter-action increment" onClick={this.incrementScore.bind(this)}> + </button>
-      </div>
-    )
-  }
+function Counter(props){
+  return (
+    <div className="counter">
+      <button className="counter-action decrement" > - </button>
+      <div className="counter-score">{props.score}</div>
+      <button className="counter-action increment" > + </button>
+    </div>
+  )
 }
-
 
 Counter.propTypes = {
-  initialScore: React.PropTypes.number.isRequired,
+  score: React.PropTypes.number.isRequired,
 }
+
+
 
 function Player(props){
   return(
@@ -81,7 +51,7 @@ function Player(props){
         {props.name}
       </div>
       <div className="player-score">
-        <Counter initialScore={props.score} />
+        <Counter score={props.score} />
       </div>
     </div>
   )
