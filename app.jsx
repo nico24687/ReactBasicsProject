@@ -67,13 +67,16 @@ var Application = React.createClass({
   getDefaultProps: function(){
     return {title: "Scoreboard"}
   },
+  getInitialState: function(){
+    return{players: this.props.initialPlayers}
+  },
   render: function(){
     return (
       <div className="scoreboard">
         <Header title={this.props.title} />
 
         <div className="players">
-          {this.props.players.map(player => {
+          {this.state.players.map(player => {
             return <Player name={player.name} score={player.score} key={player.id} />
           })}
         </div>
@@ -85,7 +88,7 @@ var Application = React.createClass({
 
 Application.propTypes = {
   title: React.PropTypes.string,
-  players: React.PropTypes.arrayOf(React.PropTypes.shape({
+  initialPlayers: React.PropTypes.arrayOf(React.PropTypes.shape({
     name: React.PropTypes.string.isRequired,
     score: React.PropTypes.number.isRequired,
     id: React.PropTypes.number.isRequired,
@@ -93,7 +96,7 @@ Application.propTypes = {
 }
 
 
-ReactDOM.render(<Application players={PLAYERS}/>, document.getElementById('container'))
+ReactDOM.render(<Application initialPlayers={PLAYERS}/>, document.getElementById('container'))
 
 
 
