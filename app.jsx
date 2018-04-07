@@ -31,15 +31,16 @@ Header.propTypes = {
 function Counter(props){
   return (
     <div className="counter">
-      <button className="counter-action decrement" > - </button>
+      <button className="counter-action decrement" onClick={function(){props.onChange(-1)}} > - </button>
       <div className="counter-score">{props.score}</div>
-      <button className="counter-action increment" > + </button>
+      <button className="counter-action increment" onClick={function () { props.onChange(1) }}> + </button>
     </div>
   )
 }
 
 Counter.propTypes = {
   score: React.PropTypes.number.isRequired,
+  onChange: React.PropTypes.func.isRequired,
 }
 
 
@@ -51,7 +52,7 @@ function Player(props){
         {props.name}
       </div>
       <div className="player-score">
-        <Counter score={props.score} />
+        <Counter score={props.score} onChange={props.onScoreChange} />
       </div>
     </div>
   )
@@ -60,6 +61,7 @@ function Player(props){
 Player.propTypes = {
   name: React.PropTypes.string.isRequired,
   score: React.PropTypes.number.isRequired,
+  onScoreChange: React.PropTypes.func.isRequired,
 }
 
 
@@ -70,6 +72,9 @@ var Application = React.createClass({
   getInitialState: function(){
     return{players: this.props.initialPlayers}
   },
+  onScoreChange: function(delta){
+    console.log('onScoreChange', delta)
+  },
   render: function(){
     return (
       <div className="scoreboard">
@@ -77,8 +82,14 @@ var Application = React.createClass({
 
         <div className="players">
           {this.state.players.map(player => {
-            return <Player name={player.name} score={player.score} key={player.id} />
-          })}
+            return (
+              <Player 
+                onScoreChange={this.onScoreChange} 
+                name={player.name} 
+                score={player.score} 
+                key={player.id} />
+            );
+          }.bind(this))}
         </div>
 
       </div>
