@@ -72,8 +72,10 @@ var Application = React.createClass({
   getInitialState: function(){
     return{players: this.props.initialPlayers}
   },
-  onScoreChange: function(delta){
-    console.log('onScoreChange', delta)
+  onScoreChange: function(index,delta){
+    console.log('onScoreChange', index, delta)
+    this.state.players[index].score += delta
+    this.setState(this.state)
   },
   render: function(){
     return (
@@ -81,10 +83,10 @@ var Application = React.createClass({
         <Header title={this.props.title} />
 
         <div className="players">
-          {this.state.players.map(player => {
+          {this.state.players.map((player, index) => {
             return (
               <Player 
-                onScoreChange={this.onScoreChange} 
+                onScoreChange={function(delta){this.onScoreChange(index, delta)}.bind(this)} 
                 name={player.name} 
                 score={player.score} 
                 key={player.id} />
