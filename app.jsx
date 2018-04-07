@@ -63,20 +63,25 @@ Player.propTypes = {
 }
 
 
-function Application(props){
-  return(
-    <div className="scoreboard">
-      <Header title={props.title} />
+var Application = React.createClass({
+  getDefaultProps: function(){
+    return {title: "Scoreboard"}
+  },
+  render: function(){
+    return (
+      <div className="scoreboard">
+        <Header title={this.props.title} />
 
-      <div className="players">
-        {props.players.map(player => {
-          return <Player name={player.name} score={player.score} key={player.id}/>
-        })}
+        <div className="players">
+          {this.props.players.map(player => {
+            return <Player name={player.name} score={player.score} key={player.id} />
+          })}
+        </div>
+
       </div>
-
-    </div>
-  )
-}
+    )
+  }
+})
 
 Application.propTypes = {
   title: React.PropTypes.string,
@@ -85,10 +90,6 @@ Application.propTypes = {
     score: React.PropTypes.number.isRequired,
     id: React.PropTypes.number.isRequired,
   })).isRequired,
-}
-
-Application.defaultProps = {
-  title: "Scoreboard", 
 }
 
 
