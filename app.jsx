@@ -16,10 +16,13 @@ var PLAYERS = [
   }
 ]
 var AddPlayerForm = React.createClass({
+  onSubmit: function(e){
+    e.preventDefault()
+  },
   render: function(){
     return(
       <div className= "add-player-form">
-        <form>
+        <form onSubmit={this.onSubmit}>
           <input type="text"/>
           <input type="submit" value="Add Player"/>
         </form>
